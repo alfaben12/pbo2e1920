@@ -2,6 +2,7 @@ package perocbaangui;
 
 import javax.swing.JOptionPane;
 
+
 public class Swing extends javax.swing.JFrame {
 private String nama,nim,jeniskelamin,info,jurusan,matakuliah="",semester;
     /**
