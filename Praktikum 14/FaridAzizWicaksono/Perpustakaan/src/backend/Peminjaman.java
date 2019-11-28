@@ -3,7 +3,7 @@ package backend;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class Peminjaman {
+public class Peminjaman { 
     private int idpeminjaman;
     private Anggota anggota = new Anggota();
     private Buku buku = new Buku();
