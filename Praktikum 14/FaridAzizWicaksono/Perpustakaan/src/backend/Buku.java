@@ -3,7 +3,7 @@ package backend;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class Buku {
+public class Buku { 
     private int idbuku;
     private Kategori kategori = new Kategori();
     private String judul;
