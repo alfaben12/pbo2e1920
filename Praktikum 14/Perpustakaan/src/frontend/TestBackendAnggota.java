@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package frontend;
+/**
+ *
+ * @author PC
+ */
 
 import backend.Anggota;
 
 public class TestBackendAnggota {
     public static void main(String[] args) {
-        Anggota agt1 = new Anggota("Rhevy", "Malang", "089748349");
-        Anggota agt2 = new Anggota("Vivi", "Seoul", "0838487324");
-        Anggota agt3 = new Anggota("Ika", "Busan", "0832749274");
+        Anggota agt1 = new Anggota("Dimas", "Depok", "001");
+        Anggota agt2 = new Anggota("Dwi", "Ternate", "002");
+        Anggota agt3 = new Anggota("Putra", "Malang", "003");
         
         //test insert
         agt1.save();
@@ -35,4 +39,5 @@ public class TestBackendAnggota {
             System.out.println("Nama: " + a.getNama() + ", Alamat : " + a.getAlamat() + ", Telepon : " + a.getTelepon());
         }
     }
+
 }

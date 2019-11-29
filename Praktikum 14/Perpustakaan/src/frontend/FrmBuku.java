@@ -5,6 +5,11 @@
  */
 package frontend;
 
+/**
+ *
+ * @author PC
+ */
+
 import backend.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -21,57 +26,54 @@ public class FrmBuku extends javax.swing.JFrame {
         tampilkanCmbKategori();
         kosongkanForm();
     }
+    
     public void kosongkanForm() {
         txtIdBuku.setText("0");
-        cmbKategori1.setSelectedIndex(0);
+        cmbKategori.setSelectedIndex(0);
         txtJudul.setText("");
-        txtPenerbit.setText("");
         txtPenulis.setText("");
+        txtPenerbit.setText("");
     }
-
+    
     public void tampilkanData() {
         String[] kolom = {"ID", "Kategori", "Judul", "Penulis", "Penerbit"};
         ArrayList<Buku> list = new Buku().getAll();
         Object rowData[] = new Object[5];
-        tblBuku.setModel(new DefaultTableModel(new Object[][]{}, kolom));
-        for (int i = 0; i < list.size(); i++) {
-            rowData[0] = list.get(i).getIdBuku();
+        
+        tblBuku.setModel(new DefaultTableModel(new Object[][] {}, kolom));
+        
+        for(int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getIdbuku();
             rowData[1] = list.get(i).getKategori().getNama();
             rowData[2] = list.get(i).getJudul();
-            rowData[3] = list.get(i).getPenerbit();
-            rowData[4] = list.get(i).getPenulis();
-            ((DefaultTableModel) tblBuku.getModel()).addRow(rowData);
+            rowData[3] = list.get(i).getPenulis();
+            rowData[4] = list.get(i).getPenerbit();
+            
+            ((DefaultTableModel)tblBuku.getModel()).addRow(rowData);
         }
-    }
-
-   
-    public ArrayList getKat(){
-        Kategori kat = new Kategori();
-        ArrayList nama = new ArrayList();
-        for (int i = 0; i < kat.getAll().size(); i++) {
-            nama.add(kat.getAll().get(i).getNama());
-        }
-        return nama;
     }
     
     public void cari(String keyword) {
-        String[] kolom = {"ID", "Kategori", "Judul", "Penerbit", "Penulis"};
+        String[] kolom = {"ID", "Kategori", "Judul", "Penulis", "Penerbit"};
         ArrayList<Buku> list = new Buku().search(keyword);
         Object rowData[] = new Object[5];
-        tblBuku.setModel(new DefaultTableModel(new Object[][]{}, kolom));
-        for (Buku buk : list) {
-            rowData[0] = buk.getIdBuku();
-            rowData[1] = buk.getKategori();
-            rowData[2] = buk.getJudul();
-            rowData[3] = buk.getPenerbit();
-            rowData[4] = buk.getPenulis();
-            ((DefaultTableModel) tblBuku.getModel()).addRow(rowData);
+        
+        tblBuku.setModel(new DefaultTableModel(new Object[][] {}, kolom));
+        
+        for(Buku buku : list) {
+            rowData[0] = buku.getIdbuku();
+            rowData[1] = buku.getKategori().getNama();
+            rowData[2] = buku.getJudul();
+            rowData[3] = buku.getPenulis();
+            rowData[4] = buku.getPenerbit();
+            
+            ((DefaultTableModel)tblBuku.getModel()).addRow(rowData);
         }
     }
-     public void tampilkanCmbKategori() {
-        cmbKategori1.setModel(new DefaultComboBoxModel(getKat().toArray()));
-    }
     
+    public void tampilkanCmbKategori () {
+        cmbKategori.setModel(new DefaultComboBoxModel(new Kategori().getAll().toArray()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,15 +84,14 @@ public class FrmBuku extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelId = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtIdBuku = new javax.swing.JTextField();
-        jLabelKategori = new javax.swing.JLabel();
-        cmbKategori1 = new javax.swing.JComboBox<>();
-        jLabelJudul = new javax.swing.JLabel();
         txtJudul = new javax.swing.JTextField();
-        jLabelPenerbit = new javax.swing.JLabel();
         txtPenerbit = new javax.swing.JTextField();
-        jLabelPenulis = new javax.swing.JLabel();
         txtPenulis = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnTambahBaru = new javax.swing.JButton();
@@ -99,27 +100,21 @@ public class FrmBuku extends javax.swing.JFrame {
         btnCari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuku = new javax.swing.JTable();
+        cmbKategori = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelId.setText("ID Buku");
+        jLabel1.setText("ID Buku");
+
+        jLabel2.setText("Kategori");
+
+        jLabel3.setText("Judul");
+
+        jLabel4.setText("Penerbit");
+
+        jLabel5.setText("Penulis");
 
         txtIdBuku.setEnabled(false);
-
-        jLabelKategori.setText("Kategori");
-
-        cmbKategori1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiksi", "Novel", "Referensi",}));
-        cmbKategori1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbKategori1ActionPerformed(evt);
-            }
-        });
-
-        jLabelJudul.setText("Judul");
-
-        jLabelPenerbit.setText("Penerbit");
-
-        jLabelPenulis.setText("Penulis");
 
         btnSimpan.setText("Simpan");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -139,12 +134,6 @@ public class FrmBuku extends javax.swing.JFrame {
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusActionPerformed(evt);
-            }
-        });
-
-        txtCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCariActionPerformed(evt);
             }
         });
 
@@ -173,106 +162,133 @@ public class FrmBuku extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblBuku);
 
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTambahBaru)
+                            .addComponent(btnSimpan))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHapus)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCari))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPenulis)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtPenulis))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelId)
-                                .addGap(26, 26, 26)
-                                .addComponent(txtIdBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelKategori)
-                                    .addComponent(jLabelJudul)
-                                    .addComponent(jLabelPenerbit))
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPenerbit)
-                                    .addComponent(cmbKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(51, 51, 51))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTambahBaru)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnHapus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCari)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCari))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSimpan)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel1))
+                                    .addComponent(jLabel5)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtJudul)
+                            .addComponent(txtPenulis)
+                            .addComponent(txtPenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelId))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelKategori))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelJudul))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPenerbit)
-                    .addComponent(txtPenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPenulis, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPenulis))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIdBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPenulis, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(23, 23, 23)
                 .addComponent(btnSimpan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTambahBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(btnTambahBaru)
+                    .addComponent(btnHapus)
+                    .addComponent(btnCari)
+                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbKategori1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKategori1ActionPerformed
+    private void txtIdBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdBukuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbKategori1ActionPerformed
+    }//GEN-LAST:event_txtIdBukuActionPerformed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        // TODO add your handling code here:
+        cari(txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
+
+    private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)tblBuku.getModel();
+        int row = tblBuku.getSelectedRow();
+        Buku buku = new Buku();
+        
+        buku = buku.getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
+
+        txtIdBuku.setText(String.valueOf(buku.getIdbuku()));
+        cmbKategori.getModel().setSelectedItem(buku.getKategori());
+        txtJudul.setText(buku.getJudul());
+        txtPenulis.setText(buku.getPenulis());
+        txtPenerbit.setText(buku.getPenerbit());
+    }//GEN-LAST:event_tblBukuMouseClicked
+
+    private void txtPenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPenerbitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPenerbitActionPerformed
+
+    private void txtPenulisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPenulisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPenulisActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        Buku b = new Buku();
-        b.setIdBuku(Integer.parseInt(txtIdBuku.getText()));
-        b.setKategori((Kategori) cmbKategori1.getSelectedItem());
-        b.setJudul(txtJudul.getText());
-        b.setPenerbit(txtPenerbit.getText());
-        b.setPenulis(txtPenulis.getText());
-        b.save();
-        txtIdBuku.setText(Integer.toString(b.getIdBuku()));
+        Buku buku = new Buku();
+        buku.setIdbuku(Integer.parseInt(txtIdBuku.getText()));
+        buku.setKategori((Kategori)cmbKategori.getSelectedItem());
+        buku.setJudul(txtJudul.getText());
+        buku.setPenulis(txtPenulis.getText());
+        buku.setPenerbit(txtPenerbit.getText()); 
+        buku.save();
+        txtIdBuku.setText(Integer.toString(buku.getIdbuku()));
         tampilkanData();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -283,35 +299,18 @@ public class FrmBuku extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) tblBuku.getModel();
+        DefaultTableModel model = (DefaultTableModel)tblBuku.getModel();
         int row = tblBuku.getSelectedRow();
+
         Buku buku = new Buku().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
         buku.delete();
         kosongkanForm();
         tampilkanData();
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
+    private void cmbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKategoriActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCariActionPerformed
-
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        // TODO add your handling code here:
-        cari(txtCari.getText());
-    }//GEN-LAST:event_btnCariActionPerformed
-
-    private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) tblBuku.getModel();
-        int row = tblBuku.getSelectedRow();
-        Buku buku = new Buku();
-        buku = buku.getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
-        txtIdBuku.setText(String.valueOf(buku.getIdBuku()));
-        cmbKategori1.getModel().setSelectedItem(buku.getKategori());
-        txtJudul.setText(buku.getJudul());
-        txtPenerbit.setText(buku.getPenerbit());
-        txtPenulis.setText(buku.getPenulis());
-    }//GEN-LAST:event_tblBukuMouseClicked
+    }//GEN-LAST:event_cmbKategoriActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,12 +352,12 @@ public class FrmBuku extends javax.swing.JFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahBaru;
-    private javax.swing.JComboBox<String> cmbKategori1;
-    private javax.swing.JLabel jLabelId;
-    private javax.swing.JLabel jLabelJudul;
-    private javax.swing.JLabel jLabelKategori;
-    private javax.swing.JLabel jLabelPenerbit;
-    private javax.swing.JLabel jLabelPenulis;
+    private javax.swing.JComboBox<String> cmbKategori;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuku;
     private javax.swing.JTextField txtCari;
