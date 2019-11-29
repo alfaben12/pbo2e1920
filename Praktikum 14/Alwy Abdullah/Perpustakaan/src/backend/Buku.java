@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Dharma
+ * @author Alwy
  */
 public class Buku {
     private int idbuku;

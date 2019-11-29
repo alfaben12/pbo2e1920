@@ -1,12 +1,21 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package backend;
+
+/**
+ *
+ * @author PC
+ */
 
 import java.util.ArrayList;
 import java.sql.*;
 import backend.*;
 
 public class Anggota {
-   private int idAnggota;
+    private int idAnggota;
     private String nama;
     private String alamat;
     private String telepon;
@@ -137,5 +146,5 @@ public class Anggota {
     public void delete(){
         String SQL = "DELETE FROM anggota WHERE idAnggota = '"+this.idAnggota+"'";
         DBHelper.executeQuery(SQL);
-    } 
+    }
 }

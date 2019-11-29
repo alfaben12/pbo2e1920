@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  *
- * @author ANGGISTA AMALIA
+ * @author Vivi Agustina
  */
 public class FrmPeminjaman extends javax.swing.JFrame {
 
